@@ -1,0 +1,15 @@
+import os
+import urllib.parse
+
+# Encoding the password in case of special characters
+db_password = os.getenv("DB_PASSWORD", "your_password_here")
+encoded_password = urllib.parse.quote_plus(db_password)
+
+# SQLAlchemy Database URI
+SQLALCHEMY_DATABASE_URI = f"mssql+pyodbc://{os.getenv('DB_USERNAME', 'your_username')}:{encoded_password}@{os.getenv('DB_HOST', 'localhost')}/{os.getenv('DB_NAME', 'your_database')}?driver=ODBC+Driver+17+for+SQL+Server"
+
+# Flask Configuration
+class Config:
+    SECRET_KEY = os.getenv("SECRET_KEY", "your_secret_key")
+    SQLALCHEMY_DATABASE_URI = SQLALCHEMY_DATABASE_URI
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
