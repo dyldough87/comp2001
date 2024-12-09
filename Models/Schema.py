@@ -2,7 +2,6 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
-# Example model for a Trail Application entity
 class Trail(db.Model):
     __tablename__ = 'trails'
     id = db.Column(db.Integer, primary_key=True)
